@@ -14,3 +14,17 @@ Cypress.Commands.add("signIn", () => {
   })
 
 });
+
+// Command to find filter in the Query recordings section by name
+Cypress.Commands.add("find_filter", (name) => {
+    cy.log('Finding filter: ' + name)
+    cy.get('.query-recordings').should('contain', name)
+});
+
+
+
+// Query recordings via the Search button in the 'Search recordings' pane
+Cypress.Commands.add("search", () => {
+    cy.log('Searching recordings....')
+    cy.get('.query-recordings').contains('Search').click()
+});

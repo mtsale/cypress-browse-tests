@@ -69,5 +69,17 @@ describe('Test the search filters in the Recordings page', () => {
         })
     })
 
+    context('URL Tests', () => {
+        it('Reloads the page and produces the same search results', () => {
+            cy.url().then((initial) => {
+                cy.visit(initial)
+                cy.signIn()
+                // Check that new results match the initial search
+                cy.get('.results-summary').should('contain', '48 matches')
+            })
+        })
+
+    })
+
 });
 

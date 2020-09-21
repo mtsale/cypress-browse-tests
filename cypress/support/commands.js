@@ -9,7 +9,7 @@ Cypress.Commands.add("signIn", () => {
     cy.contains("Sign in").click().then(() => {
         // check sign in worked
         cy.log("Verifying sign in successful");
-        cy.get(userMenu).should('contain', json.name);
+        cy.get(userMenu).wait(1500).should('contain', json.name);
     })
   })
 

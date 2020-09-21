@@ -30,7 +30,7 @@ describe('Test the search filters in the Recordings page', () => {
             cy.log('Select a device')
             cy.get('[data-cy=device-select]').click().wait(500).type('livingsprings (group) {enter}')
             cy.search()   
-            cy.first_match('.recording-group', 'livingsprings')
+            cy.first_card_match('.recording-group', 'livingsprings')
         })
         it('Can filter by date range', () => {
             // Set date for testing to be between 07/09/20 and 21/09/20 @ 1200 
@@ -46,7 +46,7 @@ describe('Test the search filters in the Recordings page', () => {
             cy.log('Select Video only')
             cy.get('[data-cy=recording-select]').select('Video only')
             cy.search()
-            // cy.first_match('.recording-type', '?') // TODO: Get access video/audio tags 
+            // cy.first_card_match('.recording-type', '?') // TODO: Get access video/audio tags 
         })
         it('Can filter by duration', () => {
             cy.log('Select Duration')

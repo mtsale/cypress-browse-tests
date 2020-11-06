@@ -28,17 +28,17 @@ describe('Test the search filters in the Recordings page', () => {
     context('Each filter can be configured', () => {
         it('Can search by device (group)', () => {            
             cy.log('Select a device')
-            cy.get('[data-cy=device-select]').click().wait(500).type('livingsprings (group) {enter}')
+            cy.get('[data-cy=device-select]').click().wait(500).type('test_woodend {enter}')
             cy.search()   
-            cy.first_card_match('.recording-group', 'livingsprings')
+            cy.first_card_match('.recording-group', 'test_woodend')
         })
         it('Can filter by date range', () => {
             // Set date for testing to be between 07/09/20 and 21/09/20 @ 1200 
             const cutoffDate = Cypress.moment().subtract(30, 'days')
             cy.log('Select Date range')
             cy.get('[data-cy=date-select]').select('Custom range').then(() => {
-                cy.get('[data-cy=date-from]').click().type('2020-09-01')
-                cy.get('[data-cy=date-to]').click().type('2020-09-21')
+                cy.get('[data-cy=date-from]').click().type('2020-10-01')
+                cy.get('[data-cy=date-to]').click().type('2020-11-01')
             })
             cy.search()
         })
@@ -46,7 +46,7 @@ describe('Test the search filters in the Recordings page', () => {
             cy.log('Select Video only')
             cy.get('[data-cy=recording-select]').select('Video only')
             cy.search()
-            // cy.first_card_match('.recording-type', '?') // TODO: Get access video/audio tags 
+            cy.get('.recording-type').first().children('span').children('svg').should('have.class', 'fa-file-video')
         })
         it('Can filter by duration', () => {
             cy.log('Select Duration')
@@ -57,9 +57,9 @@ describe('Test the search filters in the Recordings page', () => {
         })
         it('Can filter by tag', () => {
             cy.log('Select Tag')
-            cy.get('[data-cy=tag-select]').select('Animal interacted with trap')
+            cy.get('[data-cy=tag-select]').select('human tagged as...')
             cy.search()
-            cy.get('.recording-tags').first().contains('interaction')
+            cy.get('.recording-tags').first().contains('cat')
         })
         it('Can filter by animal', () => {
             cy.log('Select Animal or attribute - testing with a cat')
@@ -75,7 +75,7 @@ describe('Test the search filters in the Recordings page', () => {
                 cy.visit(initial)
                 cy.signIn()
                 // Check that new results match the initial search
-                cy.get('.results-summary').should('contain', '48 matches')
+                cy.get('.results-summary').should('contain', '1 matches')
             })
         })
 

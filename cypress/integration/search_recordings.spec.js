@@ -33,8 +33,7 @@ describe('Test the search filters in the Recordings page', () => {
             cy.first_card_match('.recording-group', 'test_woodend')
         })
         it('Can filter by date range', () => {
-            // Set date for testing to be between 07/09/20 and 21/09/20 @ 1200 
-            const cutoffDate = Cypress.moment().subtract(30, 'days')
+            // Set date range for testing to be between 01/10/20 and 01/11/20 @ 1200 
             cy.log('Select Date range')
             cy.get('[data-cy=date-select]').select('Custom range').then(() => {
                 cy.get('[data-cy=date-from]').click().type('2020-10-01')

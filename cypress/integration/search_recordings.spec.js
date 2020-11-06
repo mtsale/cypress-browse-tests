@@ -20,6 +20,9 @@ describe('Test the search filters in the Recordings page', () => {
             cy.find_filter('tags')
             cy.find_filter('Animals')
         })
+        it('Has 7 days as the default range', () => {
+            cy.get('[data-cy=date-select]').contains('7 days');
+        })
         it('Executes Search', () => {
             cy.search()
         })

@@ -83,5 +83,23 @@ describe('Test the search filters in the Recordings page', () => {
 
     })
 
+    context('Test recordings navigation', () => {
+        it('Opens card recordings in same tab', () => {
+            cy.get('.search-results').wait(1500).first() // give time for results to load
+            cy.get('.recording-details').first().click()
+            cy.url().should('include', '/recording/')
+        })
+        it('Replays previous video & alerts if next mp4 does not exist', () => {
+            // TODO: implement a Cypress data tag to the navigation elements
+            cy.get('.img-buttons').children('span').children('svg').last().should('have.attr', 'data-icon', 'angle-right').click()
+            cy.get('.alert')
+        })
+        it('Navigate to previous video', () => {
+            // TODO: implement a Cypress data tag to the navigation elements
+            cy.get('.img-buttons').children('span').children('svg').first().should('have.attr', 'data-icon', 'angle-left').click()
+            cy.get('.alert')
+        })
+    })
+
 });
 
